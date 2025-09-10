@@ -1,7 +1,25 @@
-import { Instagram, Linkedin, Locate, Mail, Map, Phone, Twitch, Twitter } from "lucide-react"
-
+import { Instagram, Linkedin, Locate, Mail, Map, Phone, Send, Twitch, Twitter } from "lucide-react"
+import { cn } from "../lib/utils"
+import { useToast } from "../hooks/use-toaster"
 
 export const ContactSection = () => { 
+
+    const { toast } = useToast()    
+
+    const handleSubmit = (e) => { 
+
+        e.preventDefault()
+
+        setTimeout(() => {
+            toast({ 
+                title : "Message sent !", 
+                description : "Thank you for your message. I'll get back to you soon", 
+            })
+        }, 1500);
+
+    }
+ 
+
     return (
         <section id="contact" className="py-25 px-4 relative bg-secondary/30">
             <div className="container mx-auto max-w-5xl">
@@ -72,7 +90,7 @@ export const ContactSection = () => {
                         </div>
                     </div>
 
-                    <div className="bg-card p-8 rounded-lg shadow-xs ">
+                    <div className="bg-card p-8 rounded-lg shadow-xs " onSubmit={handleSubmit}  >
                         <h3 className="text-2xl font-semibold mb-6" >Send a message</h3>
 
                         <form action="" className="space-y-6">
@@ -82,16 +100,19 @@ export const ContactSection = () => {
                             </div>
 
                             <div className="">
-                                <label htmlFor="name" className="block text-sm font-medium mb-2 text-left"> Your name </label>
-                                <input type="text" id="name" name="name" required  className="w-full px-4 py-3 rounded-md border border-input bg-background focus:outline-hidden focus:ring-2 focus:ring-primary" placeholder="Your Name ..." />
+                                <label htmlFor="email" className="block text-sm font-medium mb-2 text-left"> Your email </label>
+                                <input type="email" id="email" name="email" required  className="w-full px-4 py-3 rounded-md border border-input bg-background focus:outline-hidden focus:ring-2 focus:ring-primary" placeholder="Your email ..." />
                             </div>
 
                             <div className="">
-                                <label htmlFor="name" className="block text-sm font-medium mb-2 text-left"> Your name </label>
-                                <input type="text" id="name" name="name" required  className="w-full px-4 py-3 rounded-md border border-input bg-background focus:outline-hidden focus:ring-2 focus:ring-primary" placeholder="Your Name ..." />
+                                <label htmlFor="commentary" className="block text-sm font-medium mb-2 text-left"> Your message </label>
+                                <textarea type="text" id="commentary" name="commentary" required  className="w-full px-4 py-3 rounded-md border border-input bg-background focus:outline-hidden focus:ring-2 focus:ring-primary resize-none" placeholder="Hello, I'd like to talk about ..." />
                             </div>
 
-                            
+                            <button type="submit" className={cn("cosmic-button w-full flex items-center justify-center gap-2 ")}>
+                                <Send size={18} />
+                                Send message
+                            </button>
                             
 
                             
